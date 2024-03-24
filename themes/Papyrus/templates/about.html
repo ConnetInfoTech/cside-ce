@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} | About{% endblock %}
+{% set current = "about" %}
+
+{% block content %}
+
+<div class="relative mb-12 md:mt-14 text-zinc-800 dark:text-zinc-300">
+    <h1 class="flex font-bold my-10 text-4xl mb-12 md:my-12 text-zinc-800 dark:text-zinc-300">About&nbsp;
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+            stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </h1>
+    <div class="stork-wrapper">
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+1. conda activate pelican
+2. pelican content 
+3. git add -A
+4. git commit -m"update posts"
+5. git push
