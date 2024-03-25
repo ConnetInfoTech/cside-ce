@@ -2,7 +2,7 @@
 
 >This project is based on [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) which is a fork of [hugo-paper](https://github.com/nanxiaobei/hugo-paper). The goal of the project is to make a replica theme that works under Pelican site generator.
 
-A fast and responsive theme built for the [Pelican](https://blog.getpelican.com/) site generator. It is styled using [Tailwind CSS](https://tailwindcss.com/). It supports dark mode and built in search function. 
+A fast and responsive theme built for the [Pelican](https://blog.getpelican.com/) site generator. It is styled using [Tailwind CSS](https://tailwindcss.com/). It supports dark mode and built in search function.
 
 ### Demo
 Live-Demo at [https://aleylara.github.io/Papyrus](https://aleylara.github.io/Papyrus)
@@ -17,7 +17,7 @@ $ pip install pelican-readtime
 ```
 Create two directories `themes` and `pelican-plugins` inside the root level of your project. Clone the Papyrus theme inside the `themes` directory that you created.
 
-```bash 
+```bash
 $ cd myBlog
 $ mkdir themes
 $ cd themes
@@ -38,7 +38,7 @@ Papyrus theme is already setup for your search functionality. However you will s
 # Install using Homebrew
 $ brew install stork-search/stork-tap/stork
 
-# Install using the Rust toolchain and install Stork with Cargo 
+# Install using the Rust toolchain and install Stork with Cargo
 $ cargo install stork-search --locked
 ```
 
@@ -53,12 +53,12 @@ TIMEZONE = 'Australia/Sydney'
 DEFAULT_LANG = 'en'
 
 SUBTITLE = 'Papyrus'
-SUBTEXT = '''A fast and responsive theme built for the <a class="underline" 
+SUBTEXT = '''A fast and responsive theme built for the <a class="underline"
 href="https://blog.getpelican.com/">Pelican</a> site generator.<br>
-The theme is inspired from <a class="underline" 
-href="https://github.com/adityatelange/hugo-PaperMod">Hugo-PaperMod</a>. 
-It is styled using <a class="underline" 
-href="https://tailwindcss.com/">Tailwind CSS</a>. 
+The theme is inspired from <a class="underline"
+href="https://github.com/adityatelange/hugo-PaperMod">Hugo-PaperMod</a>.
+It is styled using <a class="underline"
+href="https://tailwindcss.com/">Tailwind CSS</a>.
 It supports dark mode and built in search function.
 '''
 COPYRIGHT = '©2022'
@@ -69,8 +69,8 @@ PLUGIN_PATHS = ['pelican-plugins']
 PLUGINS = ['readtime', 'search', 'neighbors', 'pelican-toc']
 
 DISPLAY_PAGES_ON_MENU = True
-DIRECT_TEMPLATES = (('index', 'search', 'tags', 'categories', 'archives',))
-PAGINATED_TEMPLATES = {'index':None,'tag':None,'category':None,'author':None,'archives':24,}
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'about', 'blog'))
+PAGINATED_TEMPLATES = {'index':None,'tag':None,'category':None,'author':None,'archives':24,'blog':None}
 
 # Site search plugin
 SEARCH_MODE = "output"
@@ -139,7 +139,7 @@ cd myBlog
 $ pelican --autoreload --listen --ignore-cache
 ```
 
-Final project directory structure should look similar to this. 
+Final project directory structure should look similar to this.
 
 ```bash
 $ (pelican) ➜ myProject tree
@@ -208,4 +208,3 @@ $ npm install
 # JIT compiled main.css
 $ npm run dev
 ```
-

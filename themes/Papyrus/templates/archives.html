@@ -27,7 +27,7 @@
 
 <div class="md:mt-14 text-zinc-800 dark:text-zinc-300 pb-6">
     <h1 class="font-bold text-4xl my-10">Archive</h1>
-    <ul class=" flex-col">
+    <ul class="flex-col">
         {% for year, year_group in dates_page.object_list|groupby('date.year')|reverse %}
         {% for month, month_group in year_group|groupby('date.month')|reverse %}
         {% for article in month_group %}
