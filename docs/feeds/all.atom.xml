@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>CSIDE</title><link href="https://connetinfotech.github.io/cside-ce/" rel="alternate"></link><link href="https://connetinfotech.github.io/cside-ce/feeds/all.atom.xml" rel="self"></link><id>https://connetinfotech.github.io/cside-ce/</id><updated>2024-03-26T14:45:00+08:00</updated><entry><title>[1] An extensible plugin system for GUI based IDE platform</title><link href="https://connetinfotech.github.io/cside-ce/1-an-extensible-plugin-system-for-gui-based-ide-platform.html" rel="alternate"></link><published>2024-03-26T14:45:00+08:00</published><updated>2024-03-26T14:45:00+08:00</updated><author><name>Jiang ZiJian</name></author><id>tag:connetinfotech.github.io,2024-03-26:/cside-ce/1-an-extensible-plugin-system-for-gui-based-ide-platform.html</id><summary type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CSIDE</title><link href="https://connetinfotech.github.io/cside-ce/" rel="alternate"></link><link href="https://connetinfotech.github.io/cside-ce/feeds/all.atom.xml" rel="self"></link><id>https://connetinfotech.github.io/cside-ce/</id><updated>2024-03-28T11:44:00+08:00</updated><entry><title>[2] Boot modes for starting up the application</title><link href="https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html" rel="alternate"></link><published>2024-03-28T11:44:00+08:00</published><updated>2024-03-28T11:44:00+08:00</updated><author><name>Jiang ZiJian</name></author><id>tag:connetinfotech.github.io,2024-03-28:/cside-ce/2-boot-modes-for-starting-up-the-application.html</id><summary type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
+&lt;p&gt;This document proposes various boot modes for starting up the application.&lt;/p&gt;
+&lt;h2 id="proposal"&gt;Proposal&lt;/h2&gt;
+&lt;p&gt;The document outlines four startup modes for the application: &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;safe&lt;/code&gt;,
+&lt;code&gt;dev&lt;/code&gt;, and &lt;code&gt;safe-dev&lt;/code&gt;. In &lt;code&gt;normal&lt;/code&gt; mode, the application starts up using the user
+configuration. Safe mode assumes that startup failure is caused by configuration
+corruption, so …&lt;/p&gt;</summary><content type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
+&lt;p&gt;This document proposes various boot modes for starting up the application.&lt;/p&gt;
+&lt;h2 id="proposal"&gt;Proposal&lt;/h2&gt;
+&lt;p&gt;The document outlines four startup modes for the application: &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;safe&lt;/code&gt;,
+&lt;code&gt;dev&lt;/code&gt;, and &lt;code&gt;safe-dev&lt;/code&gt;. In &lt;code&gt;normal&lt;/code&gt; mode, the application starts up using the user
+configuration. Safe mode assumes that startup failure is caused by configuration
+corruption, so the application starts up using a temporary folder and default
+configuration. In &lt;code&gt;dev&lt;/code&gt; mode, the logging level is adjusted to print debug
+information. Finally, in &lt;code&gt;safe-dev&lt;/code&gt; mode, the application starts up using a
+temporary folder and default configuration while also printing debug information.&lt;/p&gt;
+&lt;h2 id="rational"&gt;Rational&lt;/h2&gt;
+&lt;p&gt;By offering multiple boot modes, users have the flexibility to choose the
+startup behavior that best suits their needs or resolves any issues they may
+encounter. The inclusion of &lt;code&gt;safe&lt;/code&gt; modes (&lt;code&gt;safe&lt;/code&gt; and &lt;code&gt;safe-dev&lt;/code&gt;) ensures that the
+application can recover gracefully from potential configuration corruption or
+other startup failures, minimizing downtime and providing a smoother user
+experience. The &lt;code&gt;dev&lt;/code&gt; and &lt;code&gt;safe-dev&lt;/code&gt; modes cater to developers or administrators
+by enabling verbose logging and debug information, which can be invaluable for
+diagnosing and resolving issues during development or troubleshooting.&lt;/p&gt;</content><category term="Standards Track"></category><category term="Standards Track"></category><category term="Draft"></category></entry><entry><title>[1] An extensible plugin system for GUI based IDE platform</title><link href="https://connetinfotech.github.io/cside-ce/1-an-extensible-plugin-system-for-gui-based-ide-platform.html" rel="alternate"></link><published>2024-03-26T14:45:00+08:00</published><updated>2024-03-26T14:45:00+08:00</updated><author><name>Jiang ZiJian</name></author><id>tag:connetinfotech.github.io,2024-03-26:/cside-ce/1-an-extensible-plugin-system-for-gui-based-ide-platform.html</id><summary type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
 &lt;p&gt;This document propose an extensible plugin system for GUI based IDE platform.&lt;/p&gt;
 &lt;h2 id="rationale"&gt;Rationale&lt;/h2&gt;
 &lt;p&gt;Looking at the IDEs that have survived for a long time and developed well,
