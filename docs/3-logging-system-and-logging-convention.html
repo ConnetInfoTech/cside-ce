@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Pelican" />
-    <title>[2] Boot modes for starting up the application</title>
+    <title>[3] Logging system and logging convention</title>
     <link rel="icon" href="https://connetinfotech.github.io/cside-ce/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
@@ -17,7 +17,7 @@
     <link
         href="https://connetinfotech.github.io/cside-ce/feeds/all.atom.xml"
         type="application/atom+xml" rel="alternate" title="CSIDE Atom Feed" />
-<meta name="description" content="Abstract This document proposes various boot modes for starting up the application. Proposal The document outlines four startup modes for the..." />
+<meta name="description" content="Abstract This document proposes four levels of logging and other logging conventions should be applyed in application. Logging levels The document..." />
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
                 '(prefers-color-scheme: dark)').matches)) {
@@ -98,11 +98,12 @@
 
 <main>
   <header>
-    <h1 class="font-semibold text-3xl my-2">[2] Boot modes for starting up the application</h1>
+    <h1 class="font-semibold text-3xl my-2">[3] Logging system and logging convention</h1>
     <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
       <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
-        <time>三月 28, 2024</time>
+        <time>三月 29, 2024</time>
         <div>
+          <span>&nbsp;·&nbsp;3 min read</span>
         </div>
         <div>
           <span>&nbsp;·&nbsp;Jiang ZiJian</span>
@@ -113,7 +114,7 @@
   <details class="flex flex-col my-6 p-4 bg-zinc-200 dark:bg-zinc-800 rounded-lg">
     <summary class="text-lg font-bold">Table of contents</summary>
     <div class="mx-4 px-4 underline">
-      <div id="toc"><ul><li><a class="toc-href" href="#abstract" title="Abstract">Abstract</a></li><li><a class="toc-href" href="#proposal" title="Proposal">Proposal</a></li><li><a class="toc-href" href="#rational" title="Rational">Rational</a></li></ul></div>
+      <div id="toc"><ul><li><a class="toc-href" href="#abstract" title="Abstract">Abstract</a></li><li><a class="toc-href" href="#logging-levels" title="Logging levels">Logging levels</a></li><li><a class="toc-href" href="#logging-message-convention" title="Logging message convention">Logging message convention</a><ul><li><a class="toc-href" href="#plugin-name-prefix" title="Plugin name prefix">Plugin name prefix</a></li><li><a class="toc-href" href="#timestamp-prefix" title="Timestamp prefix">Timestamp prefix</a></li><li><a class="toc-href" href="#process-id-prefix" title="Process id prefix">Process id prefix</a></li><li><a class="toc-href" href="#blank-line" title="Blank line">Blank line</a></li></ul></li><li><a class="toc-href" href="#feature_1" title="Feature">Feature</a><ul><li><a class="toc-href" href="#logging-to-a-file" title="Logging to a file">Logging to a file</a></li></ul></li><li><a class="toc-href" href="#logging-example_1" title="Logging example">Logging example</a></li><li><a class="toc-href" href="#rule-of-thumb" title="Rule of thumb">Rule of thumb</a></li></ul></div>
     </div>
   </details>
   <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300
@@ -133,24 +134,82 @@
               prose-img:rounded-md
               ">
     <h2 id="abstract">Abstract</h2>
-<p>This document proposes various boot modes for starting up the application.</p>
-<h2 id="proposal">Proposal</h2>
-<p>The document outlines four startup modes for the application: <code>normal</code>, <code>safe</code>,
-<code>dev</code>, and <code>safe-dev</code>. In <code>normal</code> mode, the application starts up using the user
-configuration. Safe mode assumes that startup failure is caused by configuration
-corruption, so the application starts up using a temporary folder and default
-configuration. In <code>dev</code> mode, the logging level is adjusted to print debug
-information. Finally, in <code>safe-dev</code> mode, the application starts up using a
-temporary folder and default configuration while also printing debug information.</p>
-<h2 id="rational">Rational</h2>
-<p>By offering multiple boot modes, users have the flexibility to choose the
-startup behavior that best suits their needs or resolves any issues they may
-encounter. The inclusion of <code>safe</code> modes (<code>safe</code> and <code>safe-dev</code>) ensures that the
-application can recover gracefully from potential configuration corruption or
-other startup failures, minimizing downtime and providing a smoother user
-experience. The <code>dev</code> and <code>safe-dev</code> modes cater to developers or administrators
-by enabling verbose logging and debug information, which can be invaluable for
-diagnosing and resolving issues during development or troubleshooting.</p>
+<p>This document proposes four levels of logging and other logging conventions should
+be applyed in application.</p>
+<h2 id="logging-levels">Logging levels</h2>
+<p>The document outlines four levels of logging, <code>debug</code>, <code>info</code>, <code>warning</code>, <code>error</code>
+, to provide a structured approach to logging that facilitates debugging,
+monitoring, and troubleshooting of the application.</p>
+<p>Debug: This level is used for detailed debugging information. It's typically
+used during development or when diagnosing specific issues, providing developers
+with granular insight into the application's behavior.</p>
+<p>Info: The info level is for general informational messages that highlight the
+application's runtime behavior. It provides essential insights into the
+application's operations, such as startup/shutdown events or significant
+milestones.</p>
+<p>Warning: Warnings indicate potential issues or anomalies that may not prevent
+the application from functioning but warrant attention. They serve as early
+indicators of potential problems or unexpected behavior.</p>
+<p>Error: The error level is reserved for critical errors or exceptions that require
+immediate attention. These messages indicate failures or issues that impact the
+application's functionality and may require intervention to resolve.</p>
+<h2 id="logging-message-convention">Logging message convention</h2>
+<h3 id="plugin-name-prefix">Plugin name prefix</h3>
+<p>In a plugin-based system, it's essential for logging messages to be prefixed with
+the plugin name. This practice ensures clear and identifiable log entries,
+enabling developers and administrators to easily trace the origin of each message
+back to its respective plugin. By including the plugin name as a prefix, log
+entries become more organized and contextual, enhancing readability and
+simplifying debugging and troubleshooting efforts.</p>
+<p>In cases where a specific plugin is not applicable, users should utilize a name
+that is easily understandable and relevant to the context. This ensures that log
+entries remain informative and intuitive, even when they are not associated with
+a particular plugin.</p>
+<h3 id="timestamp-prefix">Timestamp prefix</h3>
+<p>Prefixing each logged message with a timestamp is a common practice to provide
+users with a clear timeline of events. This timestamp allows users to understand
+when each message occurred in relation to other events, aiding in debugging,
+monitoring, and analysis.</p>
+<h3 id="process-id-prefix">Process id prefix</h3>
+<p>Prefixing logged messages with the process ID (PID) is indeed beneficial,
+particularly in environments with multiple concurrently running processes or
+instances. This practice aids in distinguishing log entries originating from
+different processes. In an Integrated Development Environment (IDE) system,
+various components such as the language server, debugger, and terminal pty
+process are typically spawned by the IDE itself.</p>
+<h3 id="blank-line">Blank line</h3>
+<p>Adding a blank line between two logging messages enhances readability and makes
+it easier for users to distinguish between individual log entries.</p>
+<h2 id="feature_1">Feature</h2>
+<h3 id="logging-to-a-file">Logging to a file</h3>
+<p>Logging to a file ensures that log messages are persisted beyond the current
+session. This is particularly useful for tracking historical data, diagnosing
+intermittent issues, and auditing application activity over time.</p>
+<h2 id="logging-example_1">Logging example</h2>
+<div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">+</span><span class="mf">00001.710</span><span class="err">:</span><span class="w"> </span><span class="mi">35790</span><span class="err">&not;</span><span class="w"> </span><span class="o">[</span><span class="n">app</span><span class="o">]</span><span class="w"> </span><span class="n">Installing</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="s1">'webbrowser'</span><span class="p">...</span>
+
+<span class="n">I</span><span class="o">+</span><span class="mf">00001.710</span><span class="err">:</span><span class="w"> </span><span class="mi">35790</span><span class="err">&not;</span><span class="w"> </span><span class="o">[</span><span class="n">editorstack</span><span class="o">]</span><span class="w"> </span><span class="n">Register</span><span class="w"> </span><span class="n">editor</span><span class="w"> </span><span class="s1">'Web Browser'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="s1">'text/x-html'</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">[</span><span class="n">'*.html', '*.htm'</span><span class="o">]</span><span class="p">.</span>
+<span class="p">...</span>
+<span class="n">D</span><span class="o">+</span><span class="mf">00003.568</span><span class="err">:</span><span class="w"> </span><span class="mi">37910</span><span class="err">&not;</span><span class="w"> </span><span class="o">[</span><span class="n">app</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;</span><span class="n">bound</span><span class="w"> </span><span class="k">method</span><span class="w"> </span><span class="n">CodeInsight</span><span class="p">.</span><span class="n">onAppearanceThemeOptionChanged</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cshore</span><span class="p">.</span><span class="n">codeinsight</span><span class="p">.</span><span class="n">plugin</span><span class="p">.</span><span class="n">CodeInsight</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="mh">0x12184f1c0</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">observing</span><span class="w"> </span><span class="ss">"theme"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">section</span><span class="w"> </span><span class="ss">"appearance"</span>
+</code></pre></div>
+<h2 id="rule-of-thumb">Rule of thumb</h2>
+<p><strong> 1. Log messages when there is a problem or an unexpected event occurs, but not
+logging success. </strong></p>
+<p>Following the philosophy of Unix programs, which emphasizes the principle of
+silence when everything is working as expected Minimizes unnecessary noise in the
+logs and ensures that important information stands out.</p>
+<p><strong> 2. One user action must only return one message. </strong></p>
+<p>Following the principle that one action should only return one message, each
+logged message will correspond to a specific action or event, providing clear
+and concise information. This helps maintain clarity and simplicity in the log
+output, making it easier to understand and troubleshoot issues when they arise.</p>
+<p><strong> 3. User action must be logged. </strong></p>
+<p>Log user interactions or actions that may have consequences within the
+application. This helps in understanding user behavior and diagnosing
+user-reported issues.</p>
+<p><strong> 4. When you meet a problem twice and can only find out why by debugging into
+the source code, you log.</strong></p>
+<p>Encountering problems can highlight the need for additional logging.</p>
     <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
   </div>
   <footer class="flex flex-col mt-10 ">
@@ -169,19 +228,12 @@ diagnosing and resolving issues during development or troubleshooting.</p>
       </a>
     </ul>
     <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
-      <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-l-lg">
-        <a class="flex flex-col pr-2" href="https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html">
-          <div class="mx-4 py-2 text-left">
-            <p class="text-zinc-500 dark:text-neutral-400 text-sm">« PREV PAGE</p>
-            <p class="text-left py-1 hover:underline">[3] Logging system and logging convention</p>
-          </div>
-        </a>
-      </div>
+      <div class="w-1/2 rounded-l-lg"></div>
       <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-r-lg ">
-        <a class="flex flex-col" href="https://connetinfotech.github.io/cside-ce/1-an-extensible-plugin-system-for-gui-based-ide-platform.html">
+        <a class="flex flex-col" href="https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html">
           <div class="text-right mx-4 py-2">
             <p class="text-zinc-500 dark:text-neutral-400 text-sm">NEXT PAGE »</p>
-            <p class="text-right py-1 hover:underline">[1] An extensible plugin system for GUI based IDE platform</p>
+            <p class="text-right py-1 hover:underline">[2] Boot modes for starting up the application</p>
           </div>
         </a>
       </div>
@@ -189,7 +241,7 @@ diagnosing and resolving issues during development or troubleshooting.</p>
     <div class="flex bg-zinc-200 dark:bg-zinc-700 py-2 rounded-lg justify-center space-x-2 text-xs">
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="twitter" aria-label="share Features on twitter"
-          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html">
+          href="https://twitter.com/intent/tweet/?text=Features&amp;url=https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
           </li>
@@ -197,7 +249,7 @@ diagnosing and resolving issues during development or troubleshooting.</p>
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="linkedin" aria-label="share Features on linkedin"
-          href="https://www.linkedin.com/sharing/share-offsite/?url=https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html">
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
           </li>
@@ -205,7 +257,7 @@ diagnosing and resolving issues during development or troubleshooting.</p>
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="reddit" aria-label="share Features on reddit"
-          href="https://reddit.com/submit?url=https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html">
+          href="https://reddit.com/submit?url=https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-reddit fa-2x" aria-hidden="true"></i>
           </li>
@@ -213,7 +265,7 @@ diagnosing and resolving issues during development or troubleshooting.</p>
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="facebook" aria-label="share Features on facebook"
-          href="https://facebook.com/sharer/sharer.php?u=https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html">
+          href="https://facebook.com/sharer/sharer.php?u=https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-facebook fa-2x" aria-hidden="true"></i>
           </li>
@@ -221,7 +273,7 @@ diagnosing and resolving issues during development or troubleshooting.</p>
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="whatsapp" aria-label="share Features on whatsapp"
-          href="https://api.whatsapp.com/send?text=Features - https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html">
+          href="https://api.whatsapp.com/send?text=Features - https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
           </li>
@@ -229,7 +281,7 @@ diagnosing and resolving issues during development or troubleshooting.</p>
       </ul>
       <ul>
         <a target="_blank" rel="noopener noreferrer" title="telegram" aria-label="share Features on telegram"
-          href="https://telegram.me/share/url?text=Features&amp;url=https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html">
+          href="https://telegram.me/share/url?text=Features&amp;url=https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html">
           <li class="bg-gray-900 p-1 text-white rounded-md">
             <i class="fab fa-telegram fa-2x" aria-hidden="true"></i>
           </li>

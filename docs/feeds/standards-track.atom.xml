@@ -1,5 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>CSIDE - Standards Track</title><link href="https://connetinfotech.github.io/cside-ce/" rel="alternate"></link><link href="https://connetinfotech.github.io/cside-ce/feeds/standards-track.atom.xml" rel="self"></link><id>https://connetinfotech.github.io/cside-ce/</id><updated>2024-03-28T11:44:00+08:00</updated><entry><title>[2] Boot modes for starting up the application</title><link href="https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html" rel="alternate"></link><published>2024-03-28T11:44:00+08:00</published><updated>2024-03-28T11:44:00+08:00</updated><author><name>Jiang ZiJian</name></author><id>tag:connetinfotech.github.io,2024-03-28:/cside-ce/2-boot-modes-for-starting-up-the-application.html</id><summary type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CSIDE - Standards Track</title><link href="https://connetinfotech.github.io/cside-ce/" rel="alternate"></link><link href="https://connetinfotech.github.io/cside-ce/feeds/standards-track.atom.xml" rel="self"></link><id>https://connetinfotech.github.io/cside-ce/</id><updated>2024-03-29T11:06:00+08:00</updated><entry><title>[3] Logging system and logging convention</title><link href="https://connetinfotech.github.io/cside-ce/3-logging-system-and-logging-convention.html" rel="alternate"></link><published>2024-03-29T11:06:00+08:00</published><updated>2024-03-29T11:06:00+08:00</updated><author><name>Jiang ZiJian</name></author><id>tag:connetinfotech.github.io,2024-03-29:/cside-ce/3-logging-system-and-logging-convention.html</id><summary type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
+&lt;p&gt;This document proposes four levels of logging and other logging conventions should
+be applyed in application.&lt;/p&gt;
+&lt;h2 id="logging-levels"&gt;Logging levels&lt;/h2&gt;
+&lt;p&gt;The document outlines four levels of logging, &lt;code&gt;debug&lt;/code&gt;, &lt;code&gt;info&lt;/code&gt;, &lt;code&gt;warning&lt;/code&gt;, &lt;code&gt;error&lt;/code&gt;
+, to provide a structured approach to logging that facilitates debugging,
+monitoring, and troubleshooting of the application.&lt;/p&gt;
+&lt;p&gt;Debug: This level is …&lt;/p&gt;</summary><content type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
+&lt;p&gt;This document proposes four levels of logging and other logging conventions should
+be applyed in application.&lt;/p&gt;
+&lt;h2 id="logging-levels"&gt;Logging levels&lt;/h2&gt;
+&lt;p&gt;The document outlines four levels of logging, &lt;code&gt;debug&lt;/code&gt;, &lt;code&gt;info&lt;/code&gt;, &lt;code&gt;warning&lt;/code&gt;, &lt;code&gt;error&lt;/code&gt;
+, to provide a structured approach to logging that facilitates debugging,
+monitoring, and troubleshooting of the application.&lt;/p&gt;
+&lt;p&gt;Debug: This level is used for detailed debugging information. It's typically
+used during development or when diagnosing specific issues, providing developers
+with granular insight into the application's behavior.&lt;/p&gt;
+&lt;p&gt;Info: The info level is for general informational messages that highlight the
+application's runtime behavior. It provides essential insights into the
+application's operations, such as startup/shutdown events or significant
+milestones.&lt;/p&gt;
+&lt;p&gt;Warning: Warnings indicate potential issues or anomalies that may not prevent
+the application from functioning but warrant attention. They serve as early
+indicators of potential problems or unexpected behavior.&lt;/p&gt;
+&lt;p&gt;Error: The error level is reserved for critical errors or exceptions that require
+immediate attention. These messages indicate failures or issues that impact the
+application's functionality and may require intervention to resolve.&lt;/p&gt;
+&lt;h2 id="logging-message-convention"&gt;Logging message convention&lt;/h2&gt;
+&lt;h3 id="plugin-name-prefix"&gt;Plugin name prefix&lt;/h3&gt;
+&lt;p&gt;In a plugin-based system, it's essential for logging messages to be prefixed with
+the plugin name. This practice ensures clear and identifiable log entries,
+enabling developers and administrators to easily trace the origin of each message
+back to its respective plugin. By including the plugin name as a prefix, log
+entries become more organized and contextual, enhancing readability and
+simplifying debugging and troubleshooting efforts.&lt;/p&gt;
+&lt;p&gt;In cases where a specific plugin is not applicable, users should utilize a name
+that is easily understandable and relevant to the context. This ensures that log
+entries remain informative and intuitive, even when they are not associated with
+a particular plugin.&lt;/p&gt;
+&lt;h3 id="timestamp-prefix"&gt;Timestamp prefix&lt;/h3&gt;
+&lt;p&gt;Prefixing each logged message with a timestamp is a common practice to provide
+users with a clear timeline of events. This timestamp allows users to understand
+when each message occurred in relation to other events, aiding in debugging,
+monitoring, and analysis.&lt;/p&gt;
+&lt;h3 id="process-id-prefix"&gt;Process id prefix&lt;/h3&gt;
+&lt;p&gt;Prefixing logged messages with the process ID (PID) is indeed beneficial,
+particularly in environments with multiple concurrently running processes or
+instances. This practice aids in distinguishing log entries originating from
+different processes. In an Integrated Development Environment (IDE) system,
+various components such as the language server, debugger, and terminal pty
+process are typically spawned by the IDE itself.&lt;/p&gt;
+&lt;h3 id="blank-line"&gt;Blank line&lt;/h3&gt;
+&lt;p&gt;Adding a blank line between two logging messages enhances readability and makes
+it easier for users to distinguish between individual log entries.&lt;/p&gt;
+&lt;h2 id="feature_1"&gt;Feature&lt;/h2&gt;
+&lt;h3 id="logging-to-a-file"&gt;Logging to a file&lt;/h3&gt;
+&lt;p&gt;Logging to a file ensures that log messages are persisted beyond the current
+session. This is particularly useful for tracking historical data, diagnosing
+intermittent issues, and auditing application activity over time.&lt;/p&gt;
+&lt;h2 id="logging-example_1"&gt;Logging example&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;00001.710&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;35790&lt;/span&gt;&lt;span class="err"&gt;&amp;not;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Installing&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;plugin&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'webbrowser'&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+
+&lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;00001.710&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;35790&lt;/span&gt;&lt;span class="err"&gt;&amp;not;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;editorstack&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Register&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;editor&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'Web Browser'&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'text/x-html'&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;'*.html', '*.htm'&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;00003.568&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;37910&lt;/span&gt;&lt;span class="err"&gt;&amp;not;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;bound&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;method&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;CodeInsight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;onAppearanceThemeOptionChanged&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;cshore&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;codeinsight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plugin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CodeInsight&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;object&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;at&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x12184f1c0&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;observing&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;"theme"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;section&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;"appearance"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="rule-of-thumb"&gt;Rule of thumb&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt; 1. Log messages when there is a problem or an unexpected event occurs, but not
+logging success. &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Following the philosophy of Unix programs, which emphasizes the principle of
+silence when everything is working as expected Minimizes unnecessary noise in the
+logs and ensures that important information stands out.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 2. One user action must only return one message. &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Following the principle that one action should only return one message, each
+logged message will correspond to a specific action or event, providing clear
+and concise information. This helps maintain clarity and simplicity in the log
+output, making it easier to understand and troubleshoot issues when they arise.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 3. User action must be logged. &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Log user interactions or actions that may have consequences within the
+application. This helps in understanding user behavior and diagnosing
+user-reported issues.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 4. When you meet a problem twice and can only find out why by debugging into
+the source code, you log.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Encountering problems can highlight the need for additional logging.&lt;/p&gt;</content><category term="Standards Track"></category><category term="Standards Track"></category><category term="Draft"></category></entry><entry><title>[2] Boot modes for starting up the application</title><link href="https://connetinfotech.github.io/cside-ce/2-boot-modes-for-starting-up-the-application.html" rel="alternate"></link><published>2024-03-28T11:44:00+08:00</published><updated>2024-03-28T11:44:00+08:00</updated><author><name>Jiang ZiJian</name></author><id>tag:connetinfotech.github.io,2024-03-28:/cside-ce/2-boot-modes-for-starting-up-the-application.html</id><summary type="html">&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
 &lt;p&gt;This document proposes various boot modes for starting up the application.&lt;/p&gt;
 &lt;h2 id="proposal"&gt;Proposal&lt;/h2&gt;
 &lt;p&gt;The document outlines four startup modes for the application: &lt;code&gt;normal&lt;/code&gt;, &lt;code&gt;safe&lt;/code&gt;,
