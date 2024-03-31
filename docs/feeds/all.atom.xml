@@ -72,10 +72,12 @@ logging success. &lt;/strong&gt;&lt;/p&gt;
 silence when everything is working as expected Minimizes unnecessary noise in the
 logs and ensures that important information stands out.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; 2. One user action must only return one message. &lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Following the principle that one action should only return one message, each
-logged message will correspond to a specific action or event, providing clear
-and concise information. This helps maintain clarity and simplicity in the log
-output, making it easier to understand and troubleshoot issues when they arise.&lt;/p&gt;
+&lt;p&gt;User operations tend to be &lt;a href="https://en.wikipedia.org/wiki/Transaction_processing"&gt;transaction-based&lt;/a&gt;,
+each transaction must succeed or fail as a complete unit; it can never be only
+partially complete. Logged message will correspond to a specific action or event,
+providing clear and concise information. This helps maintain clarity and
+simplicity in the log output, making it easier to understand and troubleshoot
+issues when they arise.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; 3. User action must be logged. &lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Log user interactions or actions that may have consequences within the
 application. This helps in understanding user behavior and diagnosing
